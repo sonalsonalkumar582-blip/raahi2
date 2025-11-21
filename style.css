@@ -1,0 +1,348 @@
+/* Color Palette based on the uploaded Minimalist Colors image: */
+/* Light Blue: #51E2F5 */
+/* Teal: #5DF9EF */
+/* Pink: #FFA8B6 */
+/* Dark Muted Purple/Gray: #A280B9 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; 
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    overflow-x: hidden; 
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ========================================================================= */
+/* 1. HEADER & SIDEBAR STYLING                                               */
+/* ========================================================================= */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo { font-size: 28px; font-weight: 700; color: #A280B9; }
+.tagline { font-size: 10px; color: #333; margin-top: -3px;}
+.menu-toggle { background: none; border: none; font-size: 30px; color: #333; cursor: pointer; padding: 0;}
+
+/* --- Sidebar Menu --- */
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100%;
+    /* Darker translucent background with blur */
+    background-color: rgba(60, 60, 60, 0.95); 
+    color: #fff;
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+.sidebar-menu.open { right: 0; }
+.close-btn { background: none; border: none; color: #fff; font-size: 28px; position: absolute; top: 15px; right: 15px; cursor: pointer;}
+.sidebar-logo { padding: 10px 0 30px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 10px; text-align: center;}
+.sidebar-logo .logo-text { font-size: 24px; font-weight: 700; color: #FFA8B6; display: block;}
+.sidebar-logo .tagline-text { font-size: 8px; color: #fff; font-weight: 300;}
+
+.menu-item { display: flex; align-items: center; padding: 12px 5px; font-size: 15px; color: #fff; transition: background-color 0.2s;}
+.menu-item:hover { background-color: rgba(255, 255, 255, 0.05);}
+.menu-item i { margin-right: 15px; font-size: 18px; color: #51E2F5;}
+.login-item { justify-content: space-between; padding-right: 0; margin-bottom: 10px;}
+.login-btn { background-color: #FFA8B6; color: #333; border: none; padding: 5px 12px; border-radius: 20px; font-weight: 600; font-size: 12px; cursor: pointer;}
+
+/* ========================================================================= */
+/* 2. HERO SECTION & SLIDER STYLING (UPDATED FOR IMAGE BACKGROUND IN TEXT BOX)*/
+/* ========================================================================= */
+
+.hero-section {
+    position: relative;
+    height: 520px; 
+    overflow: hidden;
+    background: linear-gradient(135deg, #51E2F5 0%, #FFA8B6 100%); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* इन तीन क्लासेस (slider-wrapper, slider, slide) को अब JavaScript द्वारा नियंत्रित 
+   नहीं किया जा रहा है क्योंकि इमेज अब slide-text के अंदर हैं।
+   इसलिए इन्हें हटा दिया गया है या अप्रभावित छोड़ दिया गया है। */
+.slider-wrapper, .slider, .slide {
+    display: none; 
+}
+/* --- ADVERTISEMENT IMAGES (SECTION REMOVED: Images are now added in JS) --- */
+
+
+/* --- Content Overlay --- */
+.hero-content-box {
+    position: relative;
+    width: 90%; 
+    max-width: 700px;
+    height: 400px; 
+    background-color: white; 
+    border-radius: 10px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.text-and-dots-container {
+    height: 320px; 
+    position: relative;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+/* --- SLIDE-TEXT: विज्ञापन इमेज यहाँ पृष्ठभूमि में आएगी --- */
+.slide-text {
+    width: 100%;
+    height: 100%;
+    color: white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+    /* ********************** */
+    /* 📌 इमेज यहाँ दिखेगी (JavaScript द्वारा background-image URL जोड़ा जाएगा) */
+    /* ********************** */
+    
+    /* सुनिश्चित करें कि टेक्स्ट इमेज के ऊपर स्पष्ट रूप से दिखाई दे */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 15; /* टेक्स्ट और डॉट्स के ऊपर रहे */
+    
+    /* इमेज को कवर करने के लिए प्रॉपर्टीज */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* नोट: JavaScript backgroundImage को सेट करते समय linear-gradient को भी जोड़ता है */
+}
+
+.slide-text h1 { font-size: 28px; font-weight: 700; margin-bottom: 5px; }
+.slide-text p { font-size: 14px; }
+
+/* --- Slider Dots --- */
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    padding: 10px 0;
+    z-index: 20;
+}
+
+.dot { 
+    height: 8px; width: 8px; 
+    background-color: rgba(255, 255, 255, 0.6); 
+    border-radius: 50%; 
+    margin: 0 4px; 
+    cursor: pointer; 
+    transition: background-color 0.3s, transform 0.3s;
+}
+.dot.active { 
+    background-color: #FFA8B6; 
+    transform: scale(1.3);
+}
+
+/* --- Search Box (Desktop/Tablet Layout) --- */
+.search-box-container {
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    padding: 12px 15px; 
+    z-index: 50; 
+    box-sizing: border-box; 
+    border-top: 1px solid #eee; 
+}
+
+.search-input { 
+    flex-grow: 1; 
+    padding: 10px 0; 
+    border: none; 
+    outline: none; 
+    font-size: 16px;
+    background: transparent; 
+}
+.search-input:first-child { 
+    border-right: 1px solid #eee; 
+    padding-right: 15px;
+}
+.search-input:last-of-type {
+    padding-left: 15px;
+}
+
+.search-btn { 
+    background-color: #51E2F5; 
+    color: white; 
+    border: none; 
+    padding: 0 15px; 
+    border-radius: 8px; 
+    font-size: 18px; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
+    height: 40px; 
+    margin-left: 10px; 
+}
+.search-btn:hover { background-color: #A280B9;}
+
+
+/* ========================================================================= */
+/* 3. SERVICES SECTION STYLING                                               */
+/* ========================================================================= */
+
+.services-section {
+    padding: 40px 5% 40px 5%; 
+    text-align: center;
+}
+
+.services-section h2 { margin-bottom: 30px; font-size: 24px; font-weight: 600; }
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card { padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-weight: 600;}
+.service-card:hover { transform: translateY(-3px); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);}
+.service-card i { font-size: 30px; margin-bottom: 10px; color: #333;}
+.service-card p { font-size: 14px;}
+
+/* Color Classes */
+.color-51E2F5 { background-color: #51E2F5; }
+.color-5DF9EF { background-color: #5DF9EF; }
+.color-FFA8B6 { background-color: #FFA8B6; }
+.color-A280B9 { background-color: #A280B9; color: white; }
+.color-A280B9 i { color: white; }
+.white-bg { background-color: #ffffff; }
+.icon-A280B9 { color: #A280B9 !important; }
+.service-card.darker-text { color: #333; } 
+
+
+/* ========================================================================= */
+/* 4. FOOTER STYLING                                                         */
+/* ========================================================================= */
+
+footer { background-color: #333; color: #fff; padding: 40px 5% 20px 5%; font-size: 14px;}
+.footer-container { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto 30px auto; padding-bottom: 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);}
+.footer-brand { display: flex; flex-direction: column; }
+.footer-logo { font-size: 30px; font-weight: 700; color: #51E2F5; margin-bottom: 10px;}
+.footer-tagline { margin-bottom: 20px; color: #ccc; line-height: 1.6;}
+.social-links { margin-top: 10px;}
+.social-links a { color: #fff; font-size: 18px; margin-right: 15px; transition: color 0.3s;}
+.social-links a:hover { color: #FFA8B6; }
+.footer-links h3 { font-size: 16px; margin-bottom: 15px; color: #51E2F5; font-weight: 600; text-transform: uppercase;}
+.footer-links ul { list-style: none; padding: 0;}
+.footer-links li { margin-bottom: 8px;}
+.footer-links a { color: #ccc; transition: color 0.3s;}
+.footer-links a:hover { color: #FFA8B6; }
+.footer-bottom { text-align: center; padding-top: 10px; font-size: 12px; color: #888;}
+
+
+/* ========================================================================= */
+/* 5. RESPONSIVE MEDIA QUERIES (FINAL MOBILE OPTIMIZATION)                   */
+/* ========================================================================= */
+
+/* Tablet/Desktop adjustments */
+@media (max-width: 992px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr);}
+    .hero-content-box { max-width: 90%; }
+    .hero-section { height: 480px; }
+}
+
+/* Medium screens (Tablet vertical) */
+@media (max-width: 768px) {
+    .footer-container { grid-template-columns: repeat(2, 1fr); gap: 30px;}
+    .footer-brand { grid-column: span 2; margin-bottom: 20px;}
+    .slide-text h1 { font-size: 24px; }
+    .slide-text p { font-size: 13px; }
+    .hero-content-box { height: 380px; }
+}
+
+/* Small screens (Mobile) */
+@media (max-width: 576px) {
+    header { padding: 15px 20px;}
+    .logo { font-size: 24px;}
+    .services-grid { grid-template-columns: 1fr;}
+
+    /* Hero Section Adjustments for Mobile */
+    .hero-section { height: 420px; } 
+    .hero-content-box { 
+        height: 350px; 
+        border-radius: 5px; 
+    } 
+    .text-and-dots-container { height: 200px; }
+    
+    .slide-text { padding: 20px; }
+    .slide-text h1 { font-size: 20px; }
+    .slide-text p { font-size: 12px; }
+    
+    /* Search Box: Mobile Layout - Vertical stacking for inputs, button below */
+    .search-box-container {
+        flex-direction: column; 
+        padding: 10px 15px;
+        height: auto; 
+    }
+
+    .search-input { 
+        width: 100%; 
+        flex-grow: unset; 
+        padding: 10px 15px; 
+        margin-bottom: 8px;
+    }
+    
+    .search-input:first-child { 
+        border-right: none; 
+        border-bottom: 1px solid #eee; 
+        margin-bottom: 12px;
+    }
+    .search-input:last-of-type {
+        padding-left: 15px;
+    }
+
+    /* Search Button: Full width below inputs */
+    .search-btn { 
+        width: 100%; 
+        padding: 10px 15px;
+        margin-top: 5px; 
+        height: auto;
+        margin-left: 0;
+    }
+
+    .footer-container { grid-template-columns: 1fr; text-align: center;}
+    .footer-brand { grid-column: span 1; margin-bottom: 20px; align-items: center;}
+}
